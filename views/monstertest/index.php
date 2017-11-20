@@ -9,6 +9,9 @@ use yii\grid\GridView;
 
 $this->title = 'Monstertests';
 $this->params['breadcrumbs'][] = $this->title;
+$this->registerMetaTag(['name' => 'description', 'content'=>'Thiss is my first Yii application!']);
+$this->registerJsFile('//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.3.0/lodash.j', [
+    'position' => $this::POS_HEAD]);
 ?>
 <div class="monstertest-index">
 
@@ -24,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+           // 'id',
             'name',
             'age',
             'gender',
