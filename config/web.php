@@ -55,6 +55,7 @@ $config = [
                 'home' => 'test/index',
                 '<alias:about>' => 'test/page',
                 'page/<alias>' => 'test/page',
+                'register' => 'monster/create',
             ],
         ],
 
