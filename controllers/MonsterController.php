@@ -5,7 +5,9 @@ namespace app\controllers;
 use Yii;
 use app\models\Monster;
 use app\models\MonsterSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -26,6 +28,19 @@ class MonsterController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['update', 'delete'],
+
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['update','delete'],
+                        'roles' => ['@']
+                    ]
+                ],
+            ],
+
         ];
     }
 

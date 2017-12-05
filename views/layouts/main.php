@@ -30,7 +30,7 @@ AppAsset::register($this);
     <?php
     NavBar::begin([
         //'brandLabel' => Yii::$app->name,
-        'brandLabel' => '<img src="/images/logo10.png" alt="logo">',
+        'brandLabel' => '<img src="/images/logo11.png" alt="logo">',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar',
@@ -44,15 +44,14 @@ AppAsset::register($this);
             ['label' => 'Members', 'url' => ['/monster/']],
             [
                     'label' => 'Register',
-                    'url' => ['/register'],
+                    'url' => ['register'],
                     'visible' => Yii::$app->user->isGuest
             ],
             [
                     'label' => '',
-                    'url' => ['/monster/update', 'id' => Yii::$app->user->id],
+                    'url' => ['update', 'id' => Yii::$app->user->id],
                     'visible' => !Yii::$app->user->isGuest
             ],
-
 
 
             Yii::$app->user->isGuest ? (

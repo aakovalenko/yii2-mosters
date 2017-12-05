@@ -10,6 +10,7 @@ namespace app\commands;
 
 use yii\console\Controller;
 use app\models\Monster;
+use Yii;
 
 //./yii monster/load-monsters   run in console
 
@@ -65,4 +66,24 @@ class MonsterController extends Controller
             $monster->save();
         }
     }
+
+    public function actionPermissions()
+    {
+        $auth = Yii::$app->authManager;
+
+        $updateMonster = $auth->createPermission('updateMonster');
+        $updateMonster->description = 'Update a monster';
+        $auth->add($updateMonster);
+
+        $deleteMonster = $auth->createPermission('deleteMonster');
+        $deleteMonster->description = 'Delete a monster';
+        $auth->add($deleteMonster);
+    }
+
+    public function actionRoles()
+    {
+        $auth = Yii::$app->authManager;
+    }
+
+
 }
