@@ -10,6 +10,7 @@ namespace app\models;
 
 use Yii;
 use yii\db\ActiveRecord;
+use yii\helpers\Url;
 use yii\web\IdentityInterface;
 use yii\base\NotSupportedException;
 
@@ -85,6 +86,29 @@ class Monster extends ActiveRecord implements IdentityInterface
    {
        // TODO: Implement validateAuthKey() method.
        return $this->getAuthKey() === $authKey;
+   }
+
+   public function getPhotoInfo()
+   {
+       $path = Url::to('@webroot/images/photos/');
+       $url = Url::to('@web/images/photo/');
+       $filename = strtolower($this->name). '.jpg';
+       $alt = $this->username . "'s Profile Picture";
+
+       $imageInfo = ['alt' => $alt];
+
+       if (file_exists($path . $filename)) {
+           $imageInfo['url'] = $url.$filename;
+       } else {
+           $imageInfo['url'] = $url.'default.jpg';
+       }
+
+       return $imageInfo;
+   }
+
+   public function getProfileGender()
+   {
+       return ($this->gender === 'm') ? 'Bachelor' : 'Bachelorette';
    }
 
    public static function findByUsername($username)

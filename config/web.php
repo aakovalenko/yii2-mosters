@@ -56,6 +56,7 @@ $config = [
                 '<alias:about>' => 'test/page',
                 'page/<alias>' => 'test/page',
                 'register' => 'monster/create',
+                '/profile/<id:[\d-]+>' => '/monster/view'
             ],
         ],
 
