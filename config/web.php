@@ -58,11 +58,12 @@ $config = [
                 'register' => 'monster/create',
             ],
         ],
-        'authManager' => [
+
+       /* 'authManager' => [
           'view' => [
               'class' => 'yii\rbac\PhpManager'
           ]
-        ],
+        ],*/
 
         'view' => [
             'class' => '\app\components\View',

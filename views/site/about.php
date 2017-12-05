@@ -7,6 +7,8 @@ use app\models\Monstertest;
 
 $this->title = 'About';
 $this->params['breadcrumbs'][] = $this->title;
+$selectedMonster = (!Yii::$app->user->isGuest) ? Yii::$app->user->identity->name : '';
+$monsterMap = \yii\helpers\ArrayHelper::map(\app\models\Monster::find()->all(),'name','name');
 ?>
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
@@ -42,4 +44,12 @@ $foundMonster2 = MonsterTest::findAll(['gender' => 'm']);
     Found Monster 2 Count: <?= count($foundMonster2)?><br>
 </p>
 <hr>
+<p>
+    Validate Monster 1 Errors: <pre><?= var_dump($validateMonster1->getErrors())?></pre>
+</p>
+<p><h3>Enter your favorite monster's name</h3></p>
+<?= Html::beginForm()?>
+<?= Html::radioList('monsterName', $selectedMonster);?>
+<?= Html::input('submit', 'monsterSubmit', 'submit', ['id' => 'monsterSubmit']);?>
+
 

@@ -29,6 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
+//            'name:raw', //can put js
             'name',
             'age',
             'gender',
