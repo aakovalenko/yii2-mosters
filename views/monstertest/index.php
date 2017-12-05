@@ -35,4 +35,5 @@ $this->registerJsFile('//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.3.0/lodash.j
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-</div>
+
+
