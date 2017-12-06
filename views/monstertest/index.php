@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use yii\widgets\ListView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\MonstertestSearch */
@@ -19,19 +19,10 @@ $this->registerJsFile('//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.3.0/lodash.j
     <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
 
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-           // 'id',
-            'name',
-            'age',
-            'gender',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+ <?= ListView::widget([
+         'dataProvider' => $dataProvider,
+          'itemView' => '_monster',
+           'itemOptions' => ['class' => 'list-monster']
+]);?>
 
 
