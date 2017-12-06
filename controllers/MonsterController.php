@@ -10,6 +10,7 @@ use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * MonsterController implements the CRUD actions for Monster model.
@@ -79,6 +80,8 @@ class MonsterController extends Controller
     public function actionCreate()
     {
         $model = new Monster();
+        $model->hashPassword = true;
+        $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
@@ -107,7 +110,10 @@ class MonsterController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         } else {
             return $this->render('update', [
                 'model' => $model,

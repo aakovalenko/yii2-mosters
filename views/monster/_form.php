@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Monster */
@@ -10,7 +11,9 @@ use yii\widgets\ActiveForm;
 
 <div class="monster-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(
+        ['options' => ['enctype' => 'multipart/form-data']]
+    ); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -23,6 +26,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true])
     ->hint('6 character minimum') ?>
+
+    <?= $form->field($model, 'imageFile')->fileInput(); ?>
 
 
     <div class="form-group">

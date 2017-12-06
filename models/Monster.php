@@ -13,6 +13,8 @@ use yii\db\ActiveRecord;
 use yii\helpers\Url;
 use yii\web\IdentityInterface;
 use yii\base\NotSupportedException;
+use yii\imagine\Image;
+
 
 
 /*
@@ -31,6 +33,8 @@ class Monster extends ActiveRecord implements IdentityInterface
 {
     public $hashPassword = false;
 
+    public $imageFile;
+
    public static function tableName()
    {
        return 'monster';
@@ -44,7 +48,8 @@ class Monster extends ActiveRecord implements IdentityInterface
            [['gender'], 'string', 'max'=> 1],
            [['username'], 'unique'],
            [['password'], 'string', 'min' => 6],
-           [['gender'], 'in', 'range'=>['m','f']]
+           [['gender'], 'in', 'range'=>['m','f']],
+           [['imageFile'], 'file', 'skipOnEmpty'=>true, 'extensions'=>'png,jpg']
 
        ];
    }
@@ -60,6 +65,19 @@ class Monster extends ActiveRecord implements IdentityInterface
            'password' => 'Password',
            'authKey' => 'Auth Key'
        ];
+   }
+
+   public function upload()
+   {
+        if ($this->imageFile) {
+            $path = Url::to('@webroot/images/photos/');
+            $filename = strtolower($this->name) . '.jpg';
+            //$this->imageFile->saveAs($path . $filename);
+
+            Image::frame($this->imageFile->tempName, 20, '00FF00',100)
+                ->save($path.$filename,['quality'=>90]);
+        }
+        return true;
    }
 
    public static function findIdentity($id)
@@ -127,6 +145,7 @@ class Monster extends ActiveRecord implements IdentityInterface
            if ($this->hashPassword) {
                $this->password = \Yii::$app->security->generatePasswordHash($this->password, 10);
            }
+           $this->upload();
            return true;
        } else {
            return false;
