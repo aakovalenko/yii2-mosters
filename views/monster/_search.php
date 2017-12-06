@@ -2,10 +2,14 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\typeahead\TypeaheadBasic;
+use app\models\Monster;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\MonsterSearch */
 /* @var $form yii\widgets\ActiveForm */
+
+$nameData = \yii\helpers\ArrayHelper::getColumn(Monster::find()->all(),'name');
 ?>
 
 <div class="monster-search">
@@ -17,7 +21,12 @@ use yii\widgets\ActiveForm;
 
 
 
-    <?= $form->field($model, 'name') ?>
+    <?= $form->field($model, 'name')->widget(TypeaheadBasic::className(),
+        [
+                'data'=>$nameData,
+                'options' => ['placeholder' => 'Begin typing to see suggestions..'],
+                'pluginOptions' => ['highlight' => true]
+        ]) ?>
 
     <?= $form->field($model, 'beginAge') ?>
 
